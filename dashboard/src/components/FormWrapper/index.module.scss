@@ -1,0 +1,60 @@
+@import "../../styles/global.scss";
+
+.overall_wrapper{
+    .form_content{
+        display: flex;
+        flex-direction: column;
+        height:85vh;
+        justify-content: center;
+        // width: 40%;
+        .header{
+            width:320px;
+            h2{
+                color:$black;
+                font-size:40px;
+            }
+            p{
+                color:$text-gray
+            }
+        }
+        .form_wrapper{
+            margin-top: 30px;
+            .form_input{
+               margin-bottom: 30px;
+               label{
+                   color:$text-gray;
+               }
+               input{
+                   border: 1.5px solid $text-gray;
+                   margin-top:4px;
+               }
+            }
+            .login_button{
+                background-color: $indigo;
+                color: $pale-purple;
+                box-shadow: $general-box-shadow;
+                margin-top:10px;
+            }
+            .extras{
+                text-align: center;
+                color:$text-gray;
+                margin-top:30px;
+                p{
+                    line-height: 1.5em;
+                    &:first-of-type{
+                        span a{
+                            color:$indigo;
+                            font-weight: bold;
+                            text-decoration: none;
+                        }
+                    }
+                    &:last-of-type a{
+                        color:$indigo;
+                        font-weight: bold;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}

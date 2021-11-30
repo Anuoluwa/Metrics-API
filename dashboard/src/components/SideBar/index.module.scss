@@ -1,0 +1,80 @@
+@import '../../styles/global.scss';
+
+._{
+    height: 100%;
+    width: 230px;
+    position: fixed;
+    z-index: 1;
+    // top: 0;
+    top:70px;
+    left: 0;
+    background-color:$white;
+    overflow-x: hidden;
+    transition: all 0.3s ease-in-out;
+    .container{
+        padding:0 15px;
+        .nav_list{
+            .nav_item{
+                background-color: $bg-gray;
+                display: flex;
+                align-items: center;
+                // border-radius: 10px;
+                padding-left:15px;
+                margin: 30px 0;
+                cursor: pointer;
+                text-decoration: none;
+                transition: all .1s ease-in;
+                height:40px;
+                .nav_icon{
+                    position: relative;
+                    top:2px;
+                    .fill_icon{
+                        color:$text-gray;
+                    }
+                }
+                .nav_text{
+                    margin-left: 10px;
+                    p{
+                        color:$text-gray;
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                }
+                &:nth-of-type(5){
+                    margin-top: 25vh;
+                }
+
+                &:hover{
+                    background:$pale-purple;
+                    box-shadow: inset 10px 0px 0px -5px $indigo;
+                    .nav_icon{
+                        .fill_icon{
+                            color:$indigo;
+                        }
+                    }
+                    .nav_text{
+                        p{
+                            color:$indigo;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+            .nav_item.selected{
+                background:$pale-purple;
+                box-shadow: inset 10px 0px 0px -5px $indigo;
+                .nav_icon{
+                    .fill_icon{
+                        color:$indigo;
+                    }
+                }
+                .nav_text{
+                    p{
+                        color:$indigo;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+@import '../../styles/global.scss';
+
+._{
+    .add_btn{
+        position: fixed;
+        bottom: 30px;
+        right:20px;
+        width:inherit;
+        padding:25px 20px;
+        background-color: $indigo;
+        // border-radius: 8px;
+        display: flex;
+        align-items: center;
+        p{
+            // font-weight: bold;
+            color:$white;
+            font-size: 16px;
+        }
+        .add_icon{
+            font-size:25px!important;
+            color:$white;
+            margin-right:8px;
+            position: relative;
+            top:-1px;
+        }
+
+    }
+}

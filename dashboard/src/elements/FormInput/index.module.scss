@@ -1,0 +1,82 @@
+@import '../../styles/global.scss';
+
+.form_group{
+    position: relative;
+    .input_label{
+        .input{
+            position: relative;
+            background: $white;
+            border: 1px solid $text-gray;
+            box-sizing: border-box;
+            backdrop-filter: blur(150px);
+            border-radius: 8px;
+            height: 45px;
+            width:100%;
+            outline: transparent !important;
+            padding-left:15px;
+            // &::placeholder{
+
+            // }
+        }
+    }
+    .input_icon{
+        position: absolute;
+        top:35%;
+        left:18px;
+    }
+}
+
+.form_select_input{
+
+    select{
+        width:100%;
+        background-color: $white;
+        border: 1.5px solid $text-gray;
+        height: 45px;
+        border-radius: 8px;
+        color: $text-gray;
+        font-size: 16px;
+        padding-left:15px;
+        text-transform: capitalize;
+        &:focus{
+            color: $text-gray;
+            font-size: 16px;
+            text-transform: capitalize;
+            // outline-color: $orange;
+        }
+
+        option{
+            color: $text-gray;
+            font-size: 16px;
+            text-transform: capitalize;
+        }
+    }
+}
+
+._{
+    .textarea{
+        width:100%;
+        outline: transparent;
+        border-radius: 8px;
+        padding-left:15px;
+        border: 1.5px solid $text-gray;
+        font-family: $font-primary;
+        font-size: 16px;
+        &::-webkit-input-placeholder {
+            font-family: $font-primary;
+            font-size: 16px;
+        }
+        &:-moz-placeholder {
+            font-family: $font-primary;
+            font-size: 16px;
+        }
+        &::-moz-placeholder {
+            font-family: $font-primary;
+            font-size: 16px;
+        }
+        &:-ms-input-placeholder {
+            font-family: $font-primary;
+            font-size: 16px;
+        }
+    }
+}

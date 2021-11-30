@@ -1,0 +1,52 @@
+@import "../../styles/global.scss";
+
+._{
+    background-color: $white;
+    border-bottom: 1px solid $text-gray;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    z-index: 2;
+    .container{
+        @extend %container;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // padding-top: 15px;
+        // padding-bottom: 15px;
+        .logo{
+            color:$indigo;
+            img{
+                width:200px;
+            }
+        }
+        .nav_user_profile{
+            display: flex;
+            align-items: center;
+            .user_img{
+                width:42px;
+                height:42px;
+                border-radius: 50%;
+                margin-right: 10px;
+                img{
+                    width: 100%;
+                    height:100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+            .user_info{
+                h3{
+                    color: $black;
+                    font-size: 16px;
+                }
+                p{
+                    color:$text-gray;
+                    font-size: 14px;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}

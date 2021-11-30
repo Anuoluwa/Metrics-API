@@ -1,0 +1,30 @@
+@import '../../styles/global.scss';
+
+._{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    .container{
+        text-align: center;
+        .spinner{
+            margin-bottom:20px;
+            img{
+                animation: loadingSpinner 3s linear infinite;
+                @keyframes loadingSpinner {
+                    from{
+                        transform: rotate(0deg);
+                    }
+                    to{
+                        transform: rotate(360deg);
+                    }
+                }
+            }
+        }
+        .text{
+            text-align: center;
+            color:$text-gray;
+        }
+    }
+}

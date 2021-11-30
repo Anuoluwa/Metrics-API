@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+/* === Variables === **/
+$font-primary: 'Nunito', sans-serif;
+
+$break-point-xs: 420px;
+$break-point-s: 576px;
+$break-point-md: 782px;
+$break-point-l: 992px;
+$break-point-xl: 1024px;
+$break-point-xxl: 1200px;
+
+/* === Color Variables === */
+
+$black: #000000;
+$fade-black: #3E3E3E;
+$white: #ffffff;
+$indigo: #4B0082;
+$pale_purple: #F6EBFF;
+$yellow: #F0E100;
+$action-red:  #EB5757;
+$action-yellow:#F2994A;
+$dark-gray: rgba(0, 0, 0, 0.7);
+$text-gray: #828282;
+$bg-gray:#f5f5f5;
+$bg-gradient:linear-gradient(to right top, #4b0082, #560b8e, #611699, #6c1fa5, #7728b1);
+
+$general-box-shadow: 3px 9px 11px -6px rgba(0,0,0,0.67);
+
+%container {
+    padding:0 50px;
+ 
+    @media(max-width:$break-point-s) {
+        padding:0 30px;
+    }
+}

@@ -54,7 +54,7 @@ class MetricsController {
   }
 
   /**
-   * Get Metrics
+   * Get All Metrics
    *
    * @static
    * @param {*} req
@@ -63,9 +63,32 @@ class MetricsController {
    * @return {*}
    * @memberof MetricsController
    */
-  static async GetMetrics(req, res, next) {
+   static async GetAllMetrics(req, res, next) {
     try {
-      return InfluxModel.Select(req, res, next);
+      return InfluxModel.SelectAllMetrics(req, res, next);
+    } catch (error) {
+      return next(
+        createError({
+          status: SERVER_ERROR,
+          message: `Try again something went wrong ${error}`,
+        }),
+      );
+    }
+  }
+
+  /**
+   * Get Metrics Moving Average
+   *
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @return {*}
+   * @memberof MetricsController
+   */
+  static async GetMetricsMovingAverages(req, res, next) {
+    try {
+      return InfluxModel.SelectMovingAverages(req, res, next);
     } catch (error) {
       return next(
         createError({
