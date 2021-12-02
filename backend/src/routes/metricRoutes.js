@@ -7,6 +7,10 @@ const router = Router();
 router
   .route('/')
   .post(Validations.validateMetric, MetricsController.CreateMetric)
-  .get(MetricsController.GetMetrics);
+  .get(MetricsController.GetMetricsMovingAverages);
+
+  router
+  .route('/all')
+  .get(MetricsController.GetAllMetrics);
 
 module.exports = router;

@@ -67,7 +67,41 @@ class InfluxModel {
         return record;
     }
 
-    static async Select (req, res, next) {
+    static async SelectAllMetrics(req, res, next) {
+
+        const db = new InfluxModel();
+     
+        const queryApi = db.influxDB.getQueryApi(db.org);
+
+        const query = `from(bucket: "mercies101's Bucket") 
+                        |> range(start: 0) |> filter(fn: (r) => r._measurement == "metrics" )`;
+        const tableRecords = [];
+        const queryObserver = {
+            next(row, tableMeta) {
+                const record = tableMeta.toObject(row);
+                tableRecords.push(record);
+            },
+            error(error) {
+                winston.info(error)
+                winston.info('Finished ERROR')
+                return next(
+                    createError({
+                      status: NOT_FOUND,
+                      message: `Metrics not found ${error}`,
+                    }),
+                  );
+            },
+            complete() {
+                winston.info('Finished SUCCESS');
+                // console.log(tableRecords.length)
+                return handleResponse(res, OK, 'All Metric Retrieved Successfully', tableRecords);
+            },
+            }
+         queryApi.queryRows(query, queryObserver);
+        
+    }
+
+    static async SelectMovingAverages (req, res, next) {
         const timeObj = {
             min: 'm',
             hour: 'h',
