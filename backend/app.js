@@ -10,3 +10,4 @@ httpServer.listen(port, (err) => {
   if (err) return winston.info(err.message);
   return winston.info(`Application started on http://localhost:${port}`);
 });
+
