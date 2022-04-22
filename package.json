@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "create and get averages of metircs",
   "main": "app.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "test": "NODE_ENV=test jest --detectOpenHandles --coverage --runInBand --forceExit",
     "start": "node app.js",
