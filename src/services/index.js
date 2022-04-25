@@ -47,7 +47,6 @@ class InfluxModel {
         const name = params.name;
         const value = (params.value * 1).toFixed(2);
         const timeStamp = params.timeStamp
-        console.log(typeof timeStamp)
         const record = new Point('metrics')
         .tag('name', name)
         .floatField('value', value)
@@ -74,7 +73,8 @@ class InfluxModel {
         const queryApi = db.influxDB.getQueryApi(db.org);
 
         const query = `from(bucket: "mercies101's Bucket") 
-                        |> range(start: 0) |> filter(fn: (r) => r._measurement == "metrics" )`;
+                        |> range(start: 0) |> filter(fn: (r) => r._measurement == "metrics")
+                        |> sort(desc: false)`;
         const tableRecords = [];
         const queryObserver = {
             next(row, tableMeta) {
@@ -93,7 +93,6 @@ class InfluxModel {
             },
             complete() {
                 winston.info('Finished SUCCESS');
-                // console.log(tableRecords.length)
                 return handleResponse(res, OK, 'All Metric Retrieved Successfully', tableRecords);
             },
             }
@@ -102,27 +101,41 @@ class InfluxModel {
     }
 
     static async SelectMovingAverages (req, res, next) {
-        const timeObj = {
-            min: 'm',
-            hour: 'h',
-            day: 'd'
-        }
-        const start = req.query.start || '12'
-        const interval = req.query.interval && timeObj[req.query.interval] || "";
 
-        const avg = req.query.avg ? req.query.avg : 3;
+        const currentTimestamp = Math.floor(Date.now() / 1000);
+
+        const timeObj = {
+            minute: currentTimestamp - (60),
+            hour: currentTimestamp - (60 * 60),
+            day: currentTimestamp - (60 * 60 * 24)
+        }
+
+        const interval = {
+            minute: '1m',
+            hour: '1h',
+            day: '24h'
+        }
+
+        const windowPeriod = timeObj[req.query.windowPeriod];
+        const everyWindow = interval[req.query.windowPeriod]
+
+        const timedRange = { start: windowPeriod}
+
 
         const db = new InfluxModel();
      
         const queryApi = db.influxDB.getQueryApi(db.org);
 
-        const query = req.query.avg ? `from(bucket: "mercies101's Bucket") 
-                        |> range(start: -${start}${interval})
-                        |> movingAverage(n: ${avg})
-                        ` :
-                        `from(bucket: "mercies101's Bucket") 
-                        |> range(start: -${start}${interval})
-                        `;
+        const query = `
+                        from(bucket: "mercies101's Bucket")
+                        |> range(start: ${timedRange.start}, stop: now())
+                        |> filter(fn: (r) => r["_measurement"] == "metrics")
+                        |> filter(fn: (r) => r["_field"] == "value")
+                        |> filter(fn: (r) => r["dataSet"] == "metric-app")
+                        |> aggregateWindow(every: 1s, fn: mean, createEmpty: false)
+                        |> yield(name: "mean")
+                     `
+
         const tableRecords = [];
         const queryObserver = {
             next(row, tableMeta) {
@@ -141,7 +154,6 @@ class InfluxModel {
             },
             complete() {
                 winston.info('Finished SUCCESS');
-                // console.log(tableRecords.length)
                 return handleResponse(res, OK, 'Metric Retrieved Successfully', tableRecords);
             },
             }
